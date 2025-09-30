@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 public class MainController implements Initializable {
     
     // FXML注入的组件
-    @FXML private VBox mainContainer;
+    @FXML private BorderPane mainContainer;
     @FXML private HBox topContainer;
     @FXML private VBox leftPanel;
     @FXML private VBox rightPanel;
@@ -93,7 +93,7 @@ public class MainController implements Initializable {
     @FXML private Button deleteTemplateButton;
     
     // 底部操作区域
-    @FXML private HBox bottomContainer;
+    @FXML private VBox bottomContainer;
     @FXML private Button previewButton;
     @FXML private Button exportButton;
     @FXML private ProgressBar progressBar;
