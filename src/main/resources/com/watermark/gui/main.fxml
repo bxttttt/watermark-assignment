@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watermark.gui.controller.MainController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="图片水印工具 v1.0" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10;" />
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <HBox spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <!-- 左侧面板 - 文件管理 -->
+            <VBox fx:id="leftPanel" prefWidth="300.0" spacing="10.0" style="-fx-background-color: #f8f8f8; -fx-border-color: #ddd; -fx-border-width: 1;" HBox.hgrow="NEVER">
+               <children>
+                  <Label fx:id="fileSectionTitle" text="文件管理" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                  <HBox spacing="5.0">
+                     <children>
+                        <Button fx:id="addFilesButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="添加文件" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addFolderButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="添加文件夹" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="5.0">
+                     <children>
+                        <CheckBox fx:id="selectAllCheckBox" text="全选" />
+                        <Button fx:id="clearFilesButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="清空" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <ListView fx:id="imageListView" prefHeight="400.0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            
+            <!-- 中心面板 - 预览 -->
+            <VBox fx:id="centerPanel" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="预览" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                  <VBox fx:id="previewContainer" alignment="CENTER" spacing="10.0" style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-background-color: #fafafa;" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="previewImageView" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="previewLabel" text="请选择图片进行预览" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            
+            <!-- 右侧面板 - 设置 -->
+            <VBox fx:id="rightPanel" prefWidth="350.0" spacing="10.0" style="-fx-background-color: #f8f8f8; -fx-border-color: #ddd; -fx-border-width: 1;" HBox.hgrow="NEVER">
+               <children>
+                  <Label fx:id="settingsSectionTitle" text="水印设置" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                  <TabPane fx:id="settingsTabPane" prefHeight="500.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <!-- 文本水印设置 -->
+                        <Tab fx:id="textWatermarkTab" text="文本水印">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="文本内容" />
+                                          <TextField fx:id="textField" text="水印" />
+                                       </children>
+                                    </VBox>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <Label text="字体" />
+                                                <ComboBox fx:id="fontFamilyComboBox" prefWidth="120.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <Label text="字号" />
+                                                <Spinner fx:id="fontSizeSpinner" prefWidth="80.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <CheckBox fx:id="boldCheckBox" text="粗体" />
+                                          <CheckBox fx:id="italicCheckBox" text="斜体" />
+                                       </children>
+                                    </HBox>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <Label text="颜色" />
+                                                <ColorPicker fx:id="colorPicker" prefWidth="120.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox spacing="5.0">
+                                             <children>
+                                                <Label text="透明度" />
+                                                <Slider fx:id="opacitySlider" max="100.0" value="80.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <CheckBox fx:id="shadowCheckBox" text="阴影" />
+                                          <CheckBox fx:id="strokeCheckBox" text="描边" />
+                                       </children>
+                                    </HBox>
+                                    <VBox fx:id="strokeColorContainer" spacing="5.0" visible="false">
+                                       <children>
+                                          <Label text="描边颜色" />
+                                          <ColorPicker fx:id="strokeColorPicker" prefWidth="120.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                        
+                        <!-- 图片水印设置 -->
+                        <Tab fx:id="imageWatermarkTab" text="图片水印">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="水印图片" />
+                                          <Button fx:id="selectImageButton" mnemonicParsing="false" text="选择图片" />
+                                          <Label fx:id="imagePathLabel" text="未选择图片" style="-fx-font-size: 10px; -fx-text-fill: gray;" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="缩放比例" />
+                                          <Slider fx:id="imageScaleSlider" max="300.0" value="100.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="透明度" />
+                                          <Slider fx:id="imageOpacitySlider" max="100.0" value="80.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                        
+                        <!-- 输出设置 -->
+                        <Tab fx:id="outputTab" text="输出设置">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="输出格式" />
+                                          <ComboBox fx:id="outputFormatComboBox" prefWidth="120.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Slider fx:id="jpegQualitySlider" max="100.0" value="90.0" />
+                                          <Label fx:id="jpegQualityLabel" text="质量: 90%" />
+                                       </children>
+                                    </VBox>
+                                    <CheckBox fx:id="preserveAspectRatioCheckBox" text="保持宽高比" />
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="缩放比例" />
+                                          <Spinner fx:id="scaleSpinner" prefWidth="80.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                        
+                        <!-- 模板管理 -->
+                        <Tab fx:id="templateTab" text="模板管理">
+                           <content>
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="选择模板" />
+                                          <ComboBox fx:id="templateComboBox" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="模板名称" />
+                                          <TextField fx:id="templateNameField" />
+                                       </children>
+                                    </VBox>
+                                    <VBox spacing="5.0">
+                                       <children>
+                                          <Label text="模板描述" />
+                                          <TextArea fx:id="templateDescriptionArea" prefHeight="60.0" />
+                                       </children>
+                                    </VBox>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <Button fx:id="saveTemplateButton" mnemonicParsing="false" text="保存模板" />
+                                          <Button fx:id="deleteTemplateButton" mnemonicParsing="false" text="删除模板" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </center>
+   <bottom>
+      <VBox fx:id="bottomContainer" spacing="10.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="previewButton" mnemonicParsing="false" text="刷新预览" />
+                  <Button fx:id="exportButton" mnemonicParsing="false" text="导出图片" style="-fx-font-weight: bold;" />
+               </children>
+            </HBox>
+            <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" visible="false" />
+            <Label fx:id="statusLabel" text="就绪" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </VBox>
+   </bottom>
+</BorderPane>
